@@ -59,19 +59,25 @@ matplot(x, Map(function(x) {sin(x)^2}, x),add=T)
 
 #  Ejericio 14 - TODO: consultar
 people_count = 20
-data = sample(1:365, people_count, replace=TRUE)
+experiment_count = 100
 
-#  First implementation: O(n^2), with n=365
-count = 0 
-for (i in 1:365){
-  #  Count how many birthdays we have on day <i>
-  coincidences = sum(data == i)
-  if (coincidences > 1) {
-    count = count + coincidences
-  }
+two_people = function(birthdays) {
+    for (i in 1:100){
+        for (j in 1:(length(birthdays)-1)) {
+            if (birthdays[j] == birthdays[j+1]) return(1)
+        }
+    }
+    return(0)
 }
-prob = count / people_count
-print(data)
+
+count = 0
+for (i in 1:experiment_count) {
+  birthdays = sort(sample(1:365, people_count, replace=TRUE))
+  print(birthdays)
+  print(two_peple(birthdays))
+  count = count + two_people(birthdays)
+}
+prob = sum(count) / experiment_count
 print_result(14, prob)
 
 
