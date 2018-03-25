@@ -73,13 +73,11 @@ two_people = function(birthdays) {
 count = 0
 for (i in 1:experiment_count) {
   birthdays = sort(sample(1:365, people_count, replace=TRUE))
-  print(birthdays)
-  print(two_peple(birthdays))
   count = count + two_people(birthdays)
 }
 prob = sum(count) / experiment_count
 print_result(14, prob)
-
+print(sprintf('Theoretical result: %f', 1 - prod(365:347) / 365^19))
 
 #  Ejercicio 15
 
